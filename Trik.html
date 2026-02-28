@@ -10,52 +10,63 @@
         .video-link:hover { background: gold; color: black; }
         h1 { text-shadow: 3px 3px 10px red; letter-spacing: 5px; }
         .music-selector { background: #222; padding: 15px; border-radius: 15px; margin-bottom: 30px; border: 1px dashed gold; }
-        select { padding: 10px; background: black; color: gold; border: 1px solid gold; border-radius: 5px; cursor: pointer; }
+        input { padding: 10px; background: black; color: gold; border: 1px solid gold; border-radius: 5px; width: 70%; margin-bottom: 10px; }
+        button { padding: 10px 20px; background: gold; color: black; font-weight: bold; cursor: pointer; border: none; border-radius: 5px; }
+        button:hover { background: white; }
     </style>
 </head>
 <body>
-    <h1>🔒 DATA RAHASIA MASTER</h1>
+
+    <h1>🔒 PUSAT DATA & BROWSER MUSIK</h1>
 
     <div class="music-selector">
-        <p>🔊 PILIH BACKSOUND PERTUNJUKAN:</p>
-        <select onchange="changeMusic(this.value)">
-            <option value="">-- Pilih Lagu --</option>
-            <option value="https://www.youtube.com/embed/3vjkh-acmTE?autoplay=1">The Lantis - Membeku</option>
-            <option value="https://www.youtube.com/embed/v9S_6IidU-k?autoplay=1">Lagu Zombie (Plants vs Zombies)</option>
-            <option value="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1">Lagu Rahasia 1</option>
-        </select>
+        <p>🖥️ BROWSER MUSIK MASTER</p>
+        <input type="text" id="musicInput" placeholder="Tempel link YouTube (Zombie/Membeku)...">
+        <br>
+        <button onclick="playMusic()">ENTER</button>
         <div id="player" style="margin-top:10px;"></div>
     </div>
     
     <div class="card">
-        <h3>📂 RAHASIA MASTER #001</h3>
-        <a href="https://youtube.com/shorts/EZSWp9docwo" class="video-link" target="_blank">BUKA DATA</a>
+        <h3>📂 DATA RAHASIA #001</h3>
+        <a href="https://youtube.com/shorts/EZSWp9docwo" class="video-link" target="_blank">BUKA AKSES</a>
     </div>
 
     <div class="card">
-        <h3>📂 RAHASIA MASTER #002</h3>
-        <a href="https://youtube.com/shorts/z7yp2Zjr3j0" class="video-link" target="_blank">BUKA DATA</a>
+        <h3>📂 DATA RAHASIA #002</h3>
+        <a href="https://youtube.com/shorts/z7yp2Zjr3j0" class="video-link" target="_blank">BUKA AKSES</a>
     </div>
 
     <div class="card">
-        <h3>📂 RAHASIA MASTER #003</h3>
-        <a href="https://youtube.com/shorts/H-z1DNQhxOI" class="video-link" target="_blank">BUKA DATA</a>
+        <h3>📂 DATA RAHASIA #003</h3>
+        <a href="https://youtube.com/shorts/H-z1DNQhxOI" class="video-link" target="_blank">BUKA AKSES</a>
     </div>
 
     <div class="card">
-        <h3>📂 RAHASIA MASTER #004</h3>
-        <a href="https://youtube.com/shorts/gX6gZDr98DY" class="video-link" target="_blank">BUKA DATA</a>
+        <h3>📂 DATA RAHASIA #004</h3>
+        <a href="https://youtube.com/shorts/gX6gZDr98DY" class="video-link" target="_blank">BUKA AKSES</a>
     </div>
 
     <br>
     <a href="index.html" style="color: gray; text-decoration: none; font-size: 12px;">[ KEMBALI KE GERBANG UTAMA ]</a>
 
     <script>
-        function changeMusic(url) {
-            if(url) {
-                document.getElementById('player').innerHTML = `<iframe width="0" height="0" src="${url}" frameborder="0" allow="autoplay"></iframe><p style='font-size:10px; color:green;'>Musik Aktif...</p>`;
+        function playMusic() {
+            let link = document.getElementById('musicInput').value;
+            let id = "";
+            if(link.includes("v=")) { id = link.split("v=")[1].split("&")[0]; }
+            else if(link.includes("youtu.be/")) { id = link.split("youtu.be/")[1].split("?")[0]; }
+            
+            if(id) {
+                document.getElementById('player').innerHTML = `
+                    <iframe width="0" height="0" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="autoplay"></iframe>
+                    <p style='color:lime; font-size:12px;'>🔊 Sistem Sedang Memutar Lagu Master...</p>
+                `;
+            } else {
+                alert("Master, masukkan link YouTube yang benar!");
             }
         }
     </script>
+
 </body>
 </html>
